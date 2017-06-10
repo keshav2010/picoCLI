@@ -28,3 +28,6 @@ _check_cmd function should check a command syntax, if its valid, return 1 else r
 #
 _execute_cmd function should be responsible for execution of a command_
 #
+**# #Existing Commands**
+1. read file [ filename.txt ]
+2. write file [ filename.txt ] < userinput here >
