@@ -24,7 +24,7 @@ int ID_valid() {
 	do {
 		cout << "Enter Security Key : ";
 		getline(cin, pass);
-		if (pass == "keshav15157") {
+		if (pass == "password") { 
 			cout << "Valid Key\n";
 			cin.get();
 			break;
