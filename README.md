@@ -12,3 +12,19 @@ picoCLI breaks a command into 4 parts ( * in front means this part is required)
 3. SUBCMD* : SUBCMD stands for sub-command, this serve as a parameter to MAJOR command, every command that picoCLI contains, need a parameter to act upon
 4. USERINPUT : in case a command needs user-input, user can write code for specifying USERINPUT properties 
 
+**command.h : Abstract Class**
+command.h is an abstract class every command (predefined or defined by programmer) must inherit publically
+it specifies the properties of a command such as 
+1. isValid 
+2. Pattern[6]
+3. MAJOR, SUBMAJOR, SUBCMD, USERINPUT
+
+and some Functions 
+1. int sumPattern(int beg, int end)
+2. int check_cmd(const std::string&)//needs to be override by programmer
+3. void execute_cmd() //needs to be override by programmer
+
+_check_cmd function should check a command syntax, if its valid, return 1 else return 0_
+#
+_execute_cmd function should be responsible for execution of a command_
+#
