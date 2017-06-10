@@ -18,7 +18,7 @@ cmdEngine::~cmdEngine() {
 
 //Starting Point of CMDEngine Class
 void cmdEngine::start_cmdEngine() {
-	cout << "Command Line Engine Active...\n"; 
+	cout << "Command Line Engine Active...\n\n"; 
 	/*
 	*/
 	while (1) {
@@ -28,7 +28,7 @@ void cmdEngine::start_cmdEngine() {
 		cout << "proccessed : " << cmd << "\n";
 		int x = check(cmd);
 		if (x == 0)
-			cout << "\n lmao error dude \n";
+			cout << "\n Error!!! \n";
 	}
 }
 void cmdEngine::process(string& _CMD) {
@@ -59,16 +59,14 @@ int cmdEngine::check(const string& _CMD) {
 	istringstream sin(_CMD);
 	string major_command;
 	int isCorrect = 0;
-	cout << "major_command : ";
 	sin >> major_command;//read first major command
-	cout << major_command << "\n";
 	if (major_command == "read" || major_command == "write"||major_command=="-q") 
 	{
 		//cout << "detected major_command\n";
 		Cmd_io *cmd_io=new Cmd_io;
 		//cout << "initialized command_io engine\n";
 		if (cmd_io->check_cmd(_CMD)) 
-		{	
+		{
 			isCorrect = 1;
 			cmd_io->execute_cmd();//calls the Execute method of cmdEngine
 		}
@@ -79,8 +77,12 @@ int cmdEngine::check(const string& _CMD) {
 			cout << "\n ERROR : error in command \n ";
 			return 0;//check failed
 		}
-		if(cmd_io!=NULL)
+		cout << "deleting cmd-io\n";
+		if (cmd_io != NULL)
+		{	
 			delete cmd_io;
+			cout << "deleted\n";
+		}
 		return isCorrect;
 	}
 	/*
@@ -102,18 +104,3 @@ int cmdEngine::check(const string& _CMD) {
 		return 0;
 	}
 }
-/*
-void cmdEngine::execute(const string& _CMD) 
-{
-	istringstream sin(_CMD);
-	string major_command;
-	sin >> major_command;
-	if (major_command == "read" || major_command == "write" || major_command == "-q")
-	{
-		Cmd_io *cmd_io = new Cmd_io;
-		cmd_io->execute_cmd(_CMD);
-		delete cmd_io;
-	}
-
-}
-*/
