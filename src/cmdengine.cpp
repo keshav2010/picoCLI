@@ -26,9 +26,8 @@ void cmdEngine::start_cmdEngine() {
 		getline(cin, cmd); //get input
 		process(cmd); //process 
 		cout << "proccessed : " << cmd << "\n";
-		int x = check(cmd);
-		if (x == 0)
-			cout << "\n Error!!! \n";
+		if(!check(cmd))
+			cout<<"\n Error!!! \n";
 	}
 }
 void cmdEngine::process(string& _CMD) {
