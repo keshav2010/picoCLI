@@ -12,5 +12,5 @@ public:
 	~cmdEngine();
 	void start_cmdEngine();
 	void process(std::string&); //trimmer
-	int check(const std::string&);
+	int check(const std::string&,int toExecute=1);
 };

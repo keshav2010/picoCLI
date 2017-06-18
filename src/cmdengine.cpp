@@ -26,8 +26,9 @@ void cmdEngine::start_cmdEngine() {
 		getline(cin, cmd); //get input
 		process(cmd); //process 
 		cout << "proccessed : " << cmd << "\n";
-		if(!check(cmd))
-			cout<<"\n Error!!! \n";
+		int x = check(cmd);
+		if (x == 0)
+			cout << "\n Error!!! \n";
 	}
 }
 void cmdEngine::process(string& _CMD) {
@@ -52,13 +53,14 @@ void cmdEngine::process(string& _CMD) {
 			}
 		}
 	}//for loop [0 to _CMD.size()-1 ]
-	cout <<"processing done :"<< _CMD << endl;
+	cout <<"processing done :"<< _CMD <<"|"<<endl;
 }
-int cmdEngine::check(const string& _CMD) {
+int cmdEngine::check(const string& _CMD,int toExecute)//toExecute set true by default
+{
 	istringstream sin(_CMD);
 	string major_command;
 	int isCorrect = 0;
-	sin >> major_command;//read first major command
+	sin >> major_command;//read first major command , note that submajor can also be read 
 	if (major_command == "read" || major_command == "write"||major_command=="-q") 
 	{
 		//cout << "detected major_command\n";
@@ -67,7 +69,8 @@ int cmdEngine::check(const string& _CMD) {
 		if (cmd_io->check_cmd(_CMD)) 
 		{
 			isCorrect = 1;
-			cmd_io->execute_cmd();//calls the Execute method of cmdEngine
+			if(toExecute) 
+				cmd_io->execute_cmd();//calls the Execute method of cmdEngine
 		}
 		else {
 			if (cmd_io != NULL)
@@ -82,22 +85,34 @@ int cmdEngine::check(const string& _CMD) {
 			delete cmd_io;
 			cout << "deleted\n";
 		}
-		return isCorrect;
+		return isCorrect; 
 	}
-	/*
-	else if (major_command == "do")
+	
+	else if (major_command == "do" || major_command == "shutdown")
 	{	
-		
+		if(major_command=="shutdown")
+		{	isCorrect=1;
+			if(toExecute){
+				cout << "Shutdown Code Here";
+			}
+			return isCorrect;
+		}
 		Cmd_do *cmd_do=new Cmd_do;
 		if(cmd_do->check_cmd(_CMD))
-			cmd_do->execute_cmd(_CMD);
+		{	
+			if(toExecute)
+				cmd_do->execute_cmd();
+			isCorrect=1;
+		}
 		else
+		{	isCorrect=0;
 			cout<<"\n ERROR : error in command \n";
+		}
 		if(cmd_do!=NULL)
 			delete cmd_do;
+		return isCorrect;
 		
 	}
-	*/
 	else {
 		cout << "\n " << major_command << " is an invalid command \n";
 		return 0;
