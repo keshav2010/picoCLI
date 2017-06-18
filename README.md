@@ -31,3 +31,4 @@ _execute_cmd function should be responsible for execution of a command_
 **# #Existing Commands**
 1. read file [ filename.txt ]
 2. write file [ filename.txt ] < userinput here >
+3. do [ (any command here) ] < number here > (example : do [ read file [ filename.txt ] ] < 2 > will display content of filename.txt file after 2 seconds
