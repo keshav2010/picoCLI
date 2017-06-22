@@ -28,7 +28,7 @@ void cmdEngine::start_cmdEngine() {
 		cout << "proccessed : " << cmd << "\n";
 		int x = check(cmd);
 		if (x == 0)
-			cout << "\n Error!!! \n";
+			cout << "\n check failed for "<<cmd<<"\n";
 	}
 }
 void cmdEngine::process(string& _CMD) {
@@ -53,7 +53,7 @@ void cmdEngine::process(string& _CMD) {
 			}
 		}
 	}//for loop [0 to _CMD.size()-1 ]
-	cout <<"processing done :"<< _CMD <<"|"<<endl;
+	cout <<"processing done :"<< _CMD <<"<"<<endl;
 }
 int cmdEngine::check(const string& _CMD,int toExecute)//toExecute set true by default
 {
@@ -61,6 +61,7 @@ int cmdEngine::check(const string& _CMD,int toExecute)//toExecute set true by de
 	string major_command;
 	int isCorrect = 0;
 	sin >> major_command;//read first major command , note that submajor can also be read 
+	cout << "Major is : " << major_command << "\n";
 	if (major_command == "read" || major_command == "write"||major_command=="-q") 
 	{
 		//cout << "detected major_command\n";
@@ -76,7 +77,7 @@ int cmdEngine::check(const string& _CMD,int toExecute)//toExecute set true by de
 			if (cmd_io != NULL)
 				delete cmd_io;
 			isCorrect = 0;
-			cout << "\n ERROR : error in command \n ";
+			cout << "\n ERROR : error in command ("<<major_command<<")\n ";
 			return 0;//check failed
 		}
 		cout << "deleting cmd-io\n";
@@ -97,7 +98,9 @@ int cmdEngine::check(const string& _CMD,int toExecute)//toExecute set true by de
 			}
 			return isCorrect;
 		}
+		cout << "initializing cmd_do\n";
 		Cmd_do *cmd_do=new Cmd_do;
+		cout << "calling check_cmd(_CMD) , _CMD is :" << _CMD << ":\n";
 		if(cmd_do->check_cmd(_CMD))
 		{	
 			if(toExecute)
@@ -105,8 +108,9 @@ int cmdEngine::check(const string& _CMD,int toExecute)//toExecute set true by de
 			isCorrect=1;
 		}
 		else
-		{	isCorrect=0;
-			cout<<"\n ERROR : error in command \n";
+		{	
+			isCorrect=0;
+			cout<<"\n ERROR : error in command do\n";
 		}
 		if(cmd_do!=NULL)
 			delete cmd_do;

@@ -9,6 +9,7 @@ using namespace std;
 cmdEngine *CMDENGINE;
 int Cmd_do::check_cmd(const string& _CMD)
 {
+	cout << "inside cmd_do check \n";
 	stack Stack;
 	istringstream sin(_CMD);
 	string word;
@@ -42,7 +43,9 @@ int Cmd_do::check_cmd(const string& _CMD)
 			}
 			else //stack is filled, we need to accept this "[" as SUBCMD 
 			{
+				cout << "word [ :";
 				SUBCMD += word + " ";
+				cout << SUBCMD << ":\n";
 			}
 			Stack.push(word);
 		}
@@ -61,7 +64,9 @@ int Cmd_do::check_cmd(const string& _CMD)
 				}
 				else//stack not empty so we need to accept "]" into SUBCMD
 				{
+					cout << "word ] :";
 					SUBCMD += word + " ";
+					cout << SUBCMD << "\n";
 				}
 			}
 			else// wrong positions 
@@ -72,12 +77,21 @@ int Cmd_do::check_cmd(const string& _CMD)
 		}
 		else if (word == "<")
 		{
-			readUI = 1;
+		//	readUI = 1;
+			if (!Stack.isEmpty())//if stack is not empty, we need to read it
+			{
+				readSUBCMD = 1;
+				SUBCMD += word+" ";
+			}
+			else//stack is empty, root command
+			{
+				readUI = 1;
+			}
 			Stack.push(word);
 		}
 		else if (word == ">")
 		{
-			if (!Stack.isEmpty())
+			if (!Stack.isEmpty())//if stack is not empty
 			{
 				Stack.pop();
 				if (Stack.isEmpty())
@@ -89,6 +103,12 @@ int Cmd_do::check_cmd(const string& _CMD)
 						readUI = false;
 					}
 				}
+				else//stack is not empty, so it mean we are still reading
+				{
+					cout << "word > :";
+					SUBCMD += word + " ";
+					cout << SUBCMD << ":\n";
+				}
 			}
 			else
 			{
@@ -99,6 +119,7 @@ int Cmd_do::check_cmd(const string& _CMD)
 		else if (readSUBCMD == 1 && readUI == 0)
 		{
 			SUBCMD += word + " ";
+			cout << "SUBCMD :" << SUBCMD << ": (stack empty : "<<Stack.isEmpty()<<"\n";
 		}
 		else if (readUI == 1)
 			USERINPUT += word;
