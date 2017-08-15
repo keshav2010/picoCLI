@@ -31,4 +31,24 @@ _execute_cmd function should be responsible for execution of a command_
 **# #Existing Commands**
 1. read file [ filename.txt ]
 2. write file [ filename.txt ] < userinput here >
-3. do [ (any command here) ] < number here > (example : do [ read file [ filename.txt ] ] < 2 > will display content of filename.txt file after 2 seconds
+3. do [ (any command here) ] < seconds here >
+4. shutdown
+5. -q 
+
+#
+
+**# #Examples**
+
+write file [ myfile.txt ] < this goes in file >
+do [ write file [ myfile.txt ] < this goes in file too > ] < 2 > 
+do [ do [ write file [ myfile.txt ] < third line > ] < 2 > ] < 3 > 
+read file [ myfile.txt ] 
+do [ shutdown ] < 50 > 
+
+**execution will be like ** 
+myfile.txt will be created and first line will be written ("this goes in file") 
+next, a do-trigger alarm is set, after 2 second, it will re-open file and write "this goes in file too" as second line
+next a do-trigger alarm is set, after 3 second, it calls another do-alarm, which now execute for further 2 seconds (total : 5 second pause) and finally "third line" will be written to file
+
+read file command will show content of file
+and lastly, do statement will execute shutdown command after 50 seconds, Shutting down the operating system (windows)
