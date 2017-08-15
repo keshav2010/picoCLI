@@ -39,12 +39,12 @@ _execute_cmd function should be responsible for execution of a command_
 
 **# #Examples**
 
-write file [ myfile.txt ] < this goes in file >
-do [ write file [ myfile.txt ] < this goes in file too > ] < 2 > 
-do [ do [ write file [ myfile.txt ] < third line > ] < 2 > ] < 3 > 
-read file [ myfile.txt ] 
-do [ shutdown ] < 50 > 
-
+1. write file [ myfile.txt ] < this goes in file >
+2. do [ write file [ myfile.txt ] < this goes in file too > ] < 2 > 
+3. do [ do [ write file [ myfile.txt ] < third line > ] < 2 > ] < 3 > 
+4. read file [ myfile.txt ] 
+5. do [ shutdown ] < 50 > 
+#
 **execution will be like ** 
 myfile.txt will be created and first line will be written ("this goes in file") 
 next, a do-trigger alarm is set, after 2 second, it will re-open file and write "this goes in file too" as second line
