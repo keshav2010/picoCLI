@@ -1,5 +1,5 @@
 # picoCLI
-picoCLI is a tiny program with Command line interface written in C++ (for Windows platform only) 
+picoCLI is a tiny program with Command line interface written in C++ (Tested on Windows 7, 32 bit) 
 
 1. quickly create/append to text-files and make short-notes/reminders 
 2. quickly read from text-files
