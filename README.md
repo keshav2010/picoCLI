@@ -52,3 +52,5 @@ next a do-trigger alarm is set, after 3 second, it calls another do-alarm, which
 
 read file command will show content of file
 and lastly, do statement will execute shutdown command after 50 seconds, Shutting down the operating system (windows)
+
+**Test update**
