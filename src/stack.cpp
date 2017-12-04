@@ -2,8 +2,7 @@
 #include<string>
 #include<iostream>
 using namespace std;
-//Not using STL at the moment ... 
-//stack.cpp is just temporary work-around till a more suitable solution is found
+//Not using STL at the moment, because uhm NIH syndrome 
 node::node()
 {
 	cmd = " ";
